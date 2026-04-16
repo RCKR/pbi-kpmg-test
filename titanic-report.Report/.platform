@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "titanic-report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a80c5c3a-a075-4835-8b6e-bf8dfb80b2ac"
+  }
+}

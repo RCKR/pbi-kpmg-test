@@ -1,0 +1,153 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "77123a912ba169731e5c",
+  "position": {
+    "x": 109.60714203326491,
+    "y": 221.10406237744817,
+    "z": 0,
+    "height": 485.67302590601861,
+    "width": 1011.0313963413229
+  },
+  "visual": {
+    "visualType": "lineStackedColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Titanic-Dataset"
+                    }
+                  },
+                  "Property": "Pclass"
+                }
+              },
+              "queryRef": "Titanic-Dataset.Pclass",
+              "nativeQueryRef": "Summa Pclass",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Titanic-Dataset"
+                        }
+                      },
+                      "Property": "Survived"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Titanic-Dataset.Survived)",
+              "nativeQueryRef": "Summa Survived"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Titanic-Dataset"
+                    }
+                  },
+                  "Property": "survived_pct"
+                }
+              },
+              "queryRef": "Titanic-Dataset.survived_pct",
+              "nativeQueryRef": "survived_pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Titanic-Dataset"
+                      }
+                    },
+                    "Property": "Survived"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "72a509b54500add68bd3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Titanic-Dataset"
+              }
+            },
+            "Property": "Pclass"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "867ca829198d0bdd0d02",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Titanic-Dataset"
+                  }
+                },
+                "Property": "Survived"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "43aebd1bd3a603a6047b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Titanic-Dataset"
+              }
+            },
+            "Property": "survived_pct"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

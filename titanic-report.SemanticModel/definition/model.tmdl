@@ -1,0 +1,18 @@
+model Model
+	culture: sv-SE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: sv-SE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Titanic-Dataset"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Titanic-Dataset
+
+ref cultureInfo sv-SE
+

@@ -1,0 +1,131 @@
+table Titanic-Dataset
+	lineageTag: f1324c2e-513f-4eb2-87b1-533dd3a3ca62
+
+	measure survived_pct =
+			
+			DIVIDE(
+			    SUM('Titanic-Dataset'[Survived]),
+			    COUNT('Titanic-Dataset'[PassengerId])
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 26bf2873-2275-46bd-816b-4bfb2df2dd59
+
+	column PassengerId
+		dataType: int64
+		formatString: 0
+		lineageTag: e1b3b244-da7b-4465-b060-59839d19d5cf
+		summarizeBy: count
+		sourceColumn: PassengerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Survived
+		dataType: int64
+		formatString: 0
+		lineageTag: f83d9959-f1fa-4cc4-9096-b7368b8f74d3
+		summarizeBy: sum
+		sourceColumn: Survived
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pclass
+		dataType: int64
+		formatString: 0
+		lineageTag: 0df1f586-0c34-42df-aa77-9467a46a2914
+		summarizeBy: sum
+		sourceColumn: Pclass
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 327e8e26-60f0-4303-9366-0ba8e1701c52
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sex
+		dataType: string
+		lineageTag: 168a0efd-e3a0-4c73-978f-7147481fd966
+		summarizeBy: none
+		sourceColumn: Sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: string
+		lineageTag: 5223c8a8-9916-4355-80b8-fe20b1c93933
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column SibSp
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d3cefd8-b37b-408e-92bf-f064907eaf1d
+		summarizeBy: sum
+		sourceColumn: SibSp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Parch
+		dataType: int64
+		formatString: 0
+		lineageTag: 78a6789e-128e-47bc-be31-5d84ca31269a
+		summarizeBy: sum
+		sourceColumn: Parch
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ticket
+		dataType: string
+		lineageTag: b82aac74-288b-4e71-8689-91b69ea5a423
+		summarizeBy: none
+		sourceColumn: Ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fare
+		dataType: double
+		lineageTag: 8cd7dae6-a2b0-4614-ac4c-4cfb12f85ba5
+		summarizeBy: sum
+		sourceColumn: Fare
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cabin
+		dataType: string
+		lineageTag: 9d995b34-abd0-48e8-a8d8-fd02eee72378
+		summarizeBy: none
+		sourceColumn: Cabin
+
+		annotation SummarizationSetBy = Automatic
+
+	column Embarked
+		dataType: string
+		lineageTag: 5a06f2bb-ba21-487f-810a-3676522be9bc
+		summarizeBy: none
+		sourceColumn: Embarked
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Titanic-Dataset = m
+		mode: import
+		source =
+				let
+				    Källa = Csv.Document(File.Contents("C:\Users\richardraman\OneDrive - KPMG\Documents\GitHub\dbt-test\Titanic-Dataset.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Upphöjda rubriker" = Table.PromoteHeaders(Källa, [PromoteAllScalars=true]),
+				    #"Ändrad typ" = Table.TransformColumnTypes(#"Upphöjda rubriker",{{"PassengerId", Int64.Type}, {"Survived", Int64.Type}, {"Pclass", Int64.Type}, {"Name", type text}, {"Sex", type text}, {"Age", type text}, {"SibSp", Int64.Type}, {"Parch", Int64.Type}, {"Ticket", type text}, {"Fare", type text}, {"Cabin", type text}, {"Embarked", type text}}),
+				    #"Ersatt värde" = Table.ReplaceValue(#"Ändrad typ",".",",",Replacer.ReplaceText,{"Fare"}),
+				    #"Ändrad typ1" = Table.TransformColumnTypes(#"Ersatt värde",{{"Fare", type number}})
+				in
+				    #"Ändrad typ1"
+
+	annotation PBI_NavigationStepName = Navigering
+
+	annotation PBI_ResultType = Table
+
